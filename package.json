@@ -1,0 +1,40 @@
+{
+  "name": "ssl-cert-viewer",
+  "displayName": "SSL Cert Viewer",
+  "description": "A Visual Studio Code extension for viewing SSL certificate details.",
+  "version": "0.0.1",
+  "publisher": "your-name",
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "activationEvents": [
+    "onCommand:sslCertViewer.show"
+  ],
+  "main": "./src/extension.ts",
+  "contributes": {
+    "commands": [
+      {
+        "command": "sslCertViewer.show",
+        "title": "Show SSL Certificates"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "sslCertView",
+          "name": "SSL Certificates"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./out/src/install.js"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.0",
+    "vscode": "^1.50.0"
+  }
+}
