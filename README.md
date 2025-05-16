@@ -1,6 +1,6 @@
 # README.md
 
-# SSL Cert Viewer
+# SSL Cert Viewer (VCode Extension)
 
 SSL Cert Viewer is a Visual Studio Code extension that provides a tree view representation of SSL certificate values. It allows users to easily view important information such as the Common Name (CN), validity period, and other fields of SSL certificates.
 
