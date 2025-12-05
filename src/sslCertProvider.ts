@@ -1,4 +1,4 @@
-class SslCertProvider {
+export class SslCertProvider {
     constructor() {
         // Initialization code if needed
     }
@@ -18,5 +18,3 @@ class SslCertProvider {
         };
     }
 }
-
-export default SslCertProvider;

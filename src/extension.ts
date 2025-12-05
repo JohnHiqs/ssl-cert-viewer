@@ -3,9 +3,13 @@ import { SslCertTreeDataProvider } from './sslCertTreeDataProvider';
 
 export function activate(context: vscode.ExtensionContext) {
     const sslCertProvider = new SslCertTreeDataProvider();
-    vscode.window.createTreeView('sslCertViewer', { treeDataProvider: sslCertProvider });
+    vscode.window.registerTreeDataProvider('sslCertView', sslCertProvider);
 
-    context.subscriptions.push(sslCertProvider);
+    let disposable = vscode.commands.registerCommand('sslCertViewer.show', () => {
+        vscode.window.showInformationMessage('SSL Cert Viewer activated!');
+    });
+
+    context.subscriptions.push(disposable);
 }
 
 export function deactivate() {}
