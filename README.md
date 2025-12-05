@@ -6,9 +6,12 @@ SSL Cert Viewer is a Visual Studio Code extension that provides a tree view repr
 
 ## Features
 
-- Display SSL certificate information in a structured tree view.
-- Retrieve and parse SSL certificate data.
-- View details such as CN, valid until date, and other relevant fields.
+- **Live SSL Certificate Fetching**: Connect to any HTTPS host and retrieve its SSL certificate
+- **Comprehensive Certificate Details**: View all important certificate information
+- **Visual Status Indicators**: Quickly identify valid, expiring, and expired certificates
+- **Multiple Certificate Support**: Monitor multiple hosts simultaneously
+- **User-Friendly Interface**: Integrated tree view in VS Code Explorer
+- **Self-Signed Certificate Support**: Works with self-signed certificates for development environments
 
 ## Installation
 
@@ -43,10 +46,42 @@ SSL Cert Viewer is a Visual Studio Code extension that provides a tree view repr
 
 ## Usage
 
-- After installing the extension, you can access the SSL Cert Viewer from the Activity Bar on the side of the VS Code window.
-- The "SSL Certificates" view will appear in the Explorer sidebar.
-- Click on "Show SSL Certificates" command from the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) to activate the extension.
-- Select an SSL certificate to view its details in the tree structure.
+### Adding Certificates
+
+1. Open the VS Code Explorer sidebar
+2. Find the "SSL Certificates" view
+3. Click the "+" (Add Certificate) button in the view title bar
+4. Enter a hostname when prompted (e.g., `google.com`, `github.com:443`)
+5. The extension will fetch and display the SSL certificate details
+
+### Viewing Certificate Details
+
+- Click on a certificate in the tree view to expand it
+- View detailed information including:
+  - Certificate validity status
+  - Common Name (CN)
+  - Valid From and Valid Until dates
+  - Issuer information
+  - Subject information
+  - Serial Number
+  - Fingerprint
+  - Subject Alternative Names (SANs)
+
+### Managing Certificates
+
+- **Refresh**: Click the refresh button to update the certificate list
+- **Clear All**: Remove all certificates from the view
+- **Status Indicators**:
+  - ✓ = Valid certificate
+  - ⚠ = Expires within 30 days
+  - ✗ = Expired certificate
+
+### Command Palette
+
+Access SSL Cert Viewer commands through the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`):
+- `SSL Cert Viewer: Add Certificate` - Add a new certificate
+- `SSL Cert Viewer: Refresh` - Refresh the certificate list
+- `SSL Cert Viewer: Clear All Certificates` - Remove all certificates
 
 ## Development
 
@@ -89,11 +124,14 @@ This project is licensed under the MIT License. See the LICENSE file for details
 - ✅ Added .vscodeignore for proper packaging
 - ✅ Added .gitignore to exclude build artifacts
 - ✅ Fixed view ID consistency
+- ✅ **Implemented actual SSL certificate fetching using Node.js TLS module**
+- ✅ **Added comprehensive certificate parsing and display**
+- ✅ **Added user commands for managing certificates**
+- ✅ **Added status indicators for certificate validity**
 
 ### Items Requiring Action Before Publishing
 - ⚠️ Update publisher name in package.json (currently "your-name")
 - ⚠️ Add LICENSE file (referenced but not present)
-- ⚠️ Implement actual SSL certificate fetching logic (currently placeholder)
 - ⚠️ Add unit tests
 - ⚠️ Add integration tests
 - ⚠️ Consider adding extension icon
