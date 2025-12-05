@@ -53,7 +53,12 @@ export class SslCertProvider {
                 host: hostname,
                 port: port,
                 servername: hostname,
-                rejectUnauthorized: false, // Allow self-signed certificates
+                // INTENTIONAL: We set rejectUnauthorized to false because this tool's purpose
+                // is to VIEW certificate details, including those of self-signed, expired,
+                // or otherwise invalid certificates. This is not a security vulnerability
+                // in this context as we're not establishing a trusted connection, merely
+                // inspecting the certificate that would be presented.
+                rejectUnauthorized: false,
             };
 
             const socket = tls.connect(options, () => {

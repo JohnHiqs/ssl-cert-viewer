@@ -38,7 +38,11 @@ The SSL Cert Viewer VSCode extension has been reviewed and significantly improve
 - ✅ Proper entry point defined (out/extension.js)
 
 #### 5. **Security** - READY
-- ✅ CodeQL scan completed - 0 vulnerabilities found
+- ✅ CodeQL scan completed
+- ⚠️ 1 informational alert: Certificate validation disabled (INTENTIONAL)
+  - This is by design - the extension's purpose is to inspect certificates
+  - Including self-signed, expired, or invalid certificates
+  - Not a security vulnerability in this context as we're not establishing trusted connections
 - ✅ No deprecated dependencies
 - ✅ No security warnings in npm audit
 
