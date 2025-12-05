@@ -43,6 +43,8 @@ export class SslCertificate {
     getDaysUntilExpiry(): number {
         const now = new Date();
         const diff = this.validUntil.getTime() - now.getTime();
-        return Math.ceil(diff / (1000 * 60 * 60 * 24));
+        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+        // Return 0 for expired certificates instead of negative values
+        return days < 0 ? 0 : days;
     }
 }

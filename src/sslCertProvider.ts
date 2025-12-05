@@ -18,9 +18,35 @@ export class SslCertProvider {
             let port = 443;
 
             if (host.includes(':')) {
-                const parts = host.split(':');
-                hostname = parts[0];
-                port = parseInt(parts[1], 10);
+                // Handle IPv6 addresses in brackets [::1]:443
+                if (host.startsWith('[')) {
+                    const closeBracket = host.indexOf(']');
+                    if (closeBracket !== -1) {
+                        hostname = host.substring(1, closeBracket);
+                        const portPart = host.substring(closeBracket + 2); // Skip ']:' 
+                        if (portPart) {
+                            const parsedPort = parseInt(portPart, 10);
+                            if (!isNaN(parsedPort) && parsedPort >= 1 && parsedPort <= 65535) {
+                                port = parsedPort;
+                            } else {
+                                reject(new Error(`Invalid port number: ${portPart}`));
+                                return;
+                            }
+                        }
+                    }
+                } else {
+                    // Handle IPv4/hostname with port
+                    const lastColon = host.lastIndexOf(':');
+                    hostname = host.substring(0, lastColon);
+                    const portPart = host.substring(lastColon + 1);
+                    const parsedPort = parseInt(portPart, 10);
+                    if (!isNaN(parsedPort) && parsedPort >= 1 && parsedPort <= 65535) {
+                        port = parsedPort;
+                    } else {
+                        reject(new Error(`Invalid port number: ${portPart}`));
+                        return;
+                    }
+                }
             }
 
             const options = {
@@ -105,6 +131,12 @@ export class SslCertProvider {
      */
     private extractSubjectAltNames(altNames: string | undefined): string[] {
         if (!altNames) return [];
-        return altNames.split(', ').map(name => name.replace('DNS:', ''));
+        return altNames.split(', ').map(name => {
+            // Remove common prefixes (DNS:, IP:, URI:, etc.)
+            if (name.startsWith('DNS:')) return name.substring(4);
+            if (name.startsWith('IP:')) return name.substring(3);
+            if (name.startsWith('URI:')) return name.substring(4);
+            return name;
+        });
     }
 }

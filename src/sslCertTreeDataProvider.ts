@@ -82,9 +82,12 @@ export class SslCertTreeDataProvider implements vscode.TreeDataProvider<SslCertT
             if (!isValid) {
                 statusIcon = '✗';
                 statusText = 'Expired';
+            } else if (daysUntilExpiry === 0) {
+                statusIcon = '✗';
+                statusText = 'Expires today';
             } else if (daysUntilExpiry <= 30) {
                 statusIcon = '⚠';
-                statusText = `Expires in ${daysUntilExpiry} days`;
+                statusText = `Expires in ${daysUntilExpiry} day${daysUntilExpiry === 1 ? '' : 's'}`;
             }
 
             const certItem = new SslCertTreeItem(
