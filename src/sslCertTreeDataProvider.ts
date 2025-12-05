@@ -38,7 +38,8 @@ export class SslCertTreeDataProvider implements vscode.TreeDataProvider<SslCertT
         // Add certificate details as children
         certItem.children = [
             new SslCertTreeItem(`Valid Until: ${sampleCert.validUntil.toDateString()}`, vscode.TreeItemCollapsibleState.None),
-            new SslCertTreeItem(`Common Name: ${sampleCert.commonName}`, vscode.TreeItemCollapsibleState.None)
+            new SslCertTreeItem(`Issuer: Sample CA`, vscode.TreeItemCollapsibleState.None),
+            new SslCertTreeItem(`Serial Number: 1234567890`, vscode.TreeItemCollapsibleState.None)
         ];
         
         return [certItem];
