@@ -1,4 +1,7 @@
-class SslCertificateView {
+import * as vscode from 'vscode';
+import { SslCertificate } from '../models/sslCertificate';
+
+export class SslCertificateView {
     private panel: vscode.WebviewPanel | undefined;
 
     constructor() {
